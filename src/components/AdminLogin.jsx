@@ -1,3 +1,5 @@
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -28,7 +30,7 @@ export default function AdminLogin() {
       localStorage.setItem("token", "dummy-admin-token");
       localStorage.setItem("role", "admin");
       toast.success("Admin login successful!");
-      setTimeout(() => navigate("/admin/dashboard"), 1500);
+      setTimeout(() => navigate("/Admin/AdminDashboardLayout"), 1500);
     } else {
       toast.error("Invalid admin credentials");
     }
@@ -36,15 +38,15 @@ export default function AdminLogin() {
 
   return (
      <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      className="flex items-center justify-center min-h-screen  bg-purple-200 bg-cover bg-center"
       style={{ backgroundImage: "url('/images/faded.jpg')" }} // 👈 your background image
     >
       <ToastContainer />
       <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-2xl">
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">Admin Login</h2>
+        <h2 className="text-2xl font-bold text-center text-purple-600 mb-6">Admin Login</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block mb-1 text-gray-600">Email</label>
+            <label htmlFor="email" className="block mb-1 text-purple-600">Email</label>
             <input
               type="email"
               name="email"
@@ -56,7 +58,7 @@ export default function AdminLogin() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block mb-1 text-gray-600">Password</label>
+            <label htmlFor="password" className="block mb-1 text-purple-600">Password</label>
             <input
               type="password"
               name="password"
@@ -69,7 +71,7 @@ export default function AdminLogin() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 font-bold"
+            className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 font-bold"
           >
             Login
           </button>

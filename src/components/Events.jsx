@@ -1,5 +1,6 @@
 
 
+import { Link } from 'react-router-dom';
 const products = [
   {
     id: 1,
@@ -70,9 +71,11 @@ const Events = () => {
               <span className="text-2xl font-bold text-green-600">
                 {product.price}
               </span>
+              <Link to="/signup">
               <button className="mt-4 w-full bg-purple-600 text-white font-semibold py-2 rounded-full hover:bg-purple-700 transition duration-300">
-                Buy Ticket
+               Buy Ticket
               </button>
+              </Link>
             </div>
           </div>
         ))}

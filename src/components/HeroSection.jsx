@@ -20,7 +20,7 @@ const HeroSection = () => {
       setCurrentImageIndex((prevIndex) => 
         (prevIndex + 1) % images.length
       );
-    }, 3000);
+    }, 2000);
 
     // Clear the interval when the component unmounts
     return () => clearInterval(interval);
@@ -38,7 +38,7 @@ const HeroSection = () => {
         <p className="text-xl md:text-2xl mb-8 max-w-2xl">
           Discover our exclusive collection of authentic traditional attire, handcrafted with care and tradition.
         </p>
-        <Link to="/product" className="bg-white text-black font-semibold py-3 px-8 rounded-full hover:bg-gray-200 transition duration-300">
+        <Link to="/signup" className="bg-white text-black font-semibold py-3 px-8 rounded-full hover:bg-gray-200 transition duration-300">
           Shop the Collection
         </Link>
       </div>

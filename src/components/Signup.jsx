@@ -3,12 +3,11 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Signup2() {
+export default function Signup() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    gender: "",
-    age: "",
+    
     email: "",
     password: "",
     confirmPassword: "",
@@ -21,25 +20,9 @@ export default function Signup2() {
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  const {
-    firstname,
-    lastname,
-    gender,
-    age,
-    email,
-    password,
-    confirmPassword,
-  } = formData;
+  const { firstname, lastname, email, password, confirmPassword } = formData;
 
-  if (
-    !firstname ||
-    !lastname ||
-    !gender ||
-    !age ||
-    !email ||
-    !password ||
-    !confirmPassword
-  ) {
+  if (!firstname || !lastname || !email || !password || !confirmPassword) {
     return toast.error("All fields are required");
   }
 
@@ -47,59 +30,58 @@ export default function Signup2() {
     return toast.error("Passwords do not match");
   }
 
-  // Get existing patients from localStorage
-  const existingPatients = JSON.parse(localStorage.getItem("patients")) || [];
+  // Get existing clients from localStorage
+  const existingClients = JSON.parse(localStorage.getItem("clients")) || [];
 
   // Check if email already exists
-  const emailExists = existingPatients.some(
-    (patient) => patient.email === email
-  );
+  const emailExists = existingClients.some((client) => client.email === email);
   if (emailExists) {
     return toast.error("Email already exists!");
   }
 
-  // Add new patient to array
-  const newPatient = {
+  // Create new client with a unique ID
+  const newClient = {
+    id: Date.now().toString(), // 👈 unique ID
     firstname,
     lastname,
-    gender,
-    age,
     email,
-    password, // optionally hash in real app
+    password, // ⚠️ in real apps, hash this
   };
 
-  existingPatients.push(newPatient);
-  localStorage.setItem("patients", JSON.stringify(existingPatients));
+  // Save new client in clients array
+  existingClients.push(newClient);
+  localStorage.setItem("clients", JSON.stringify(existingClients));
+
+  // ✅ Save as currentUser immediately after signup
+  localStorage.setItem("currentUser", JSON.stringify(newClient));
 
   toast.success("Registration successful!");
 
-  // Optionally reset form
+  // Reset form
   setFormData({
     firstname: "",
     lastname: "",
-    gender: "",
-    age: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  // Optionally navigate to login
-  // navigate("/login");
+  // navigate("/dashboard"); // 👈 uncomment if you want redirect
 };
+
 
   return (
      <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/faded.jpg')" }} // 👈 your background image
+      className="flex items-center justify-center min-h-screen bg-cover bg-purple-200 bg-center"
+      
     >
       <ToastContainer />
       <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-2xl">
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">Signup</h2>
+        <h2 className="text-2xl font-bold text-center text-purple-600 mb-6">Client Signup</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex gap-4">
             <div className="w-1/2">
-              <label className="block text-gray-600 mb-1">First Name</label>
+              <label className="block text-purple-600 mb-1">First Name</label>
               <input
                 type="text"
                 name="firstname"
@@ -109,7 +91,7 @@ export default function Signup2() {
               />
             </div>
             <div className="w-1/2">
-              <label className="block text-gray-600 mb-1">Last Name</label>
+              <label className="block text-purple-600 mb-1">Last Name</label>
               <input
                 type="text"
                 name="lastname"
@@ -120,34 +102,10 @@ export default function Signup2() {
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <div className="w-1/2">
-              <label className="block text-gray-600 mb-1">Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-            <div className="w-1/2">
-              <label className="block text-gray-600 mb-1">Age</label>
-              <input
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-          </div>
+         
 
           <div>
-            <label className="block text-gray-600 mb-1">Email</label>
+            <label className="block text-purple-600 mb-1">Email</label>
             <input
               type="email"
               name="email"
@@ -158,7 +116,7 @@ export default function Signup2() {
           </div>
 
           <div>
-            <label className="block text-gray-600 mb-1">Password</label>
+            <label className="block text-purple-600 mb-1">Password</label>
             <input
               type="password"
               name="password"
@@ -169,7 +127,7 @@ export default function Signup2() {
           </div>
 
           <div>
-            <label className="block text-gray-600 mb-1">Confirm Password</label>
+            <label className="block text-purple-600 mb-1">Confirm Password</label>
             <input
               type="password"
               name="confirmPassword"
@@ -181,7 +139,7 @@ export default function Signup2() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold"
+            className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-gray-700 transition duration-200 font-semibold"
           >
             Sign Up
           </button>

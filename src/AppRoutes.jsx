@@ -1,13 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route,  } from "react-router-dom";
 
 
-
-import ProtectedRoute from "./componentss/ProtectedRoute";
-import DashboardLayout from "./components/Patient/DashboardLayout";
-import PatientBills from "./components/Patient/PatientBills";
-import Profile from "./components/Patient/Profile";
-import Appointment from "./components/Patient/Appointment";
-import AdminReport from "./components/Admin/AdminReport";
 
 
 import Header from './components/Header'
@@ -22,32 +15,33 @@ import Events from './components/Events';
 // import Appointment from './components/Appointment';
 import AdminLogin from './components/AdminLogin';
 import ScrollToTop from './components/Scroll';
-import Dashboard from './components/Dashboard';
+import DashboardLayout from './components/Client/DashboardLayout';
+import AdminDashboardLayout from "./components/Admin/AdminDashboardLayout";
+import ClientLogin from './components/ClientLogin';
 import TestAd from './components/TestAd';
 import Bassa from './components/Bassa';
 import Bokkos from './components/Bokkos';
 import HeroSection from './components/HeroSection';
 import Product from './components/Product';
+import Event1 from "./components/Client/Event1";
+import DashboardHome from "./components/Client/DashboardHome";
+import Bookings from "./components/Client/Bookings";
+
+
+// import UpcomingEvents from "./events/UpcomingEvents";
+// import AddEvent from "./admin/AddEvent";
+import Signup from "./components/Signup";
+
+
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
 
 
 
 
 
 
-
-import ProtectedAdminRoute from "./componentss/ProtectedAdminRoute";
-import AdminDashboardLayout from "./components/Admin/AdminDashboardLayout";
-import AdminBills from "./components/Admin/AdminBills";
-import AdminBillsList from "./components/Admin/AdminBillsList";
-
-
-
-import BookedAppointments from "./components/Patient/BookedAppointments";
-import AdminPatients from "./components/Admin/AdminPatients";
-import AdminAppointments from "./components/Admin/AdminAppointments";
-import AdminNotice from "./components/Admin/AdminNotice";
-import Signup2 from "./components/Signup2";
-import Client from "./components/Client";
 
 
 
@@ -65,53 +59,47 @@ function AppRoutes() {
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>}/>
           <Route path="/barkin-ladi" element={<BarkinLadi/>}/> 
-          <Route path="/Admin" element={<AdminLogin/>}/>
+          
           <Route path="/test" element={<TestAd/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
+          
           <Route path="/bassa" element={<Bassa/>}/>
           <Route path="/bokkos" element={<Bokkos/>}/>
           <Route path="/hero" element={<HeroSection/>}/>
           <Route path="/product" element={<Product/>}/> 
           <Route path="/events" element={<Events/>}/> 
-          <Route path="/signup2" element={<Signup2/>}/> 
-          <Route path="/client" element={<Client/>}/> 
+          <Route path="/signup" element={<Signup />} />
+        <Route path="/client" element={<ClientLogin />} />
+        <Route path="/Admin" element={<AdminLogin />} />
+        
           
          
-
-        {/* Protected patient area */}
+ {/* Protected patient area */}
         <Route
-          path="/patient/dashboard"
+          path="/Client/DashboardLayout"
           element={
             <ProtectedRoute>
               <DashboardLayout />
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="profile" />} />
-          <Route path="profile" element={<Profile/>} />
-          <Route path="appointments" element={<Appointment />} />
-          <Route path="bookedappointments" element={<BookedAppointments />} />
-          <Route path="mybills" element={<PatientBills />} />
+          <Route index element={<DashboardHome />} />
+           <Route path="events" element={<Event1/>}/>
+           <Route path="bookings" element={<Bookings />} />
+           <Route path ="prof" element={<DashboardHome/>}/>
+           
+
         </Route>
 
         {/* Protected admin area */}
         <Route
-          path="/admin/dashboard"
+          path="/Admin/AdminDashboardLayout"
           element={
             <ProtectedAdminRoute>
               <AdminDashboardLayout />
             </ProtectedAdminRoute>
           }
         >
-          <Route index element={<Navigate to="records" />} />
-          <Route path="records" element={<AdminPatients />} />
-          <Route path="adminappointments" element={<AdminAppointments />} />
-          <Route path="report" element={<AdminReport />} />
-          <Route path="bills" element={<AdminBills />} />
-          <Route path="billslist" element={<AdminBillsList />} />
-          <Route path="notice" element={<AdminNotice/>} />
         </Route>
-
       </Routes>
       <Footer/>
     </BrowserRouter>
